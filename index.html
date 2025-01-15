@@ -9,6 +9,33 @@
   <body>
     <h1>My Library</h1>
     <ul class="book-list"></ul>
+    <button class="btn-show">Add a new book</button>
+    <dialog>
+      <h4>Book Info</h4>
+      <form action="" method="dialog">
+        <div class="form-control">
+          <label for="title">Title:</label>
+          <input type="text" name="title" id="title" />
+        </div>
+        <div class="form-control">
+          <label for="author">Author:</label>
+          <input type="text" name="author" id="author" />
+        </div>
+        <div class="form-control">
+          <label for="pages">Number of pages:</label>
+          <input type="number" name="pages" id="pages" max="10000" />
+        </div>
+        <div class="form-control">
+          <label for="isRead">I read this book already</label>
+          <input type="checkbox" name="isRead" id="isRead" />
+        </div>
+        <div class="form-control">
+          <button type="submit" class="btn-submit">Add</button>
+          <button type="reset" class="btn-reset">Reset</button>
+          <button class="btn-close" formmethod="dialog">Close</button>
+        </div>
+      </form>
+    </dialog>
     <script src="script.js"></script>
   </body>
 </html>
