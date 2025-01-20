@@ -1,12 +1,15 @@
 const myLibrary = [];
-let id = 1;
+// let id = 1;
 
-function Book(name, author, pages, isRead) {
-  this.name = name;
-  this.author = author;
-  this.pages = pages;
-  this.isRead = isRead;
-  this.id = id++;
+class Book {
+  static id = 1;
+  constructor(name, author, pages, isRead) {
+    this.name = name;
+    this.author = author;
+    this.pages = pages;
+    this.isRead = isRead;
+    this.id = Book.id++;
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -50,11 +53,11 @@ dialog.addEventListener("close", () => {
 });
 
 function addDefaultBooks() {
-  book1 = new Book("book1", "author1", 1000, false);
+  let book1 = new Book("book1", "author1", 1000, false);
   addBookToLibrary(book1);
-  book2 = new Book("book2", "author2", 1001, false);
+  let book2 = new Book("book2", "author2", 1001, false);
   addBookToLibrary(book2);
-  book3 = new Book("book3", "author3", 1002, true);
+  let book3 = new Book("book3", "author3", 1002, true);
   addBookToLibrary(book3);
 }
 
