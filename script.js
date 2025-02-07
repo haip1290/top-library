@@ -22,6 +22,10 @@ const showBtn = document.querySelector(".btn-show");
 const submitBtn = document.querySelector(".btn-submit");
 const closeBtn = document.querySelector(".btn-close");
 const form = dialog.querySelector("form");
+const titleE = document.querySelector("#title");
+const authorE = document.querySelector("#author");
+const pagesE = document.querySelector("#pages");
+const isReadE = document.querySelector("#isRead");
 
 showBtn.addEventListener("click", () => {
   dialog.showModal();
@@ -32,21 +36,44 @@ closeBtn.addEventListener("click", () => {
 });
 
 submitBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  let title = document.querySelector("#title").value.trim();
-  let author = document.querySelector("#author").value.trim();
-  let pages = document.querySelector("#pages").value.trim();
-  let isRead = document.querySelector("#isRead").checked;
-  let newBook = new Book(title, author, pages, isRead);
+  // e.preventDefault();
+  let title = titleE.value.trim();
+  let author = authorE.value.trim();
+  let pages = pagesE.value.trim();
+  let isRead = isReadE.checked;
 
-  if (!title || !author || !pages || isNaN(pages) || pages < 0) {
-    alert("Please fill out fills correctly");
+  if (validForm()) {
+    let newBook = new Book(title, author, pages, isRead);
+    addBookToLibrary(newBook);
+    form.reset();
+    dialog.close();
   }
-
-  addBookToLibrary(newBook);
-  form.reset();
-  dialog.close();
 });
+
+function IsValidTitle() {
+  if (!titleE.checkValidity()) {
+    return false;
+  }
+  return true;
+}
+
+function isValidAuthor() {
+  if (!authorE.checkValidity()) {
+    return false;
+  }
+  return true;
+}
+
+function isValidPages() {
+  if (!pagesE.checkValidity()) {
+    return false;
+  }
+  return true;
+}
+
+function validForm() {
+  return form.checkValidity();
+}
 
 dialog.addEventListener("close", () => {
   showLibrary();
@@ -89,7 +116,7 @@ function showLibrary() {
     let textNode = document.createTextNode(
       `${book.name} by ${book.author}, ${book.pages} pages, ${
         book.isRead ? "read already" : "not read yet"
-      } `
+      } `,
     );
     li.id = "book" + book.id;
     li.appendChild(textNode);
